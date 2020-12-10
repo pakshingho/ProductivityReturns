@@ -1,6 +1,7 @@
 library(plm)
 library(sandwich)
 library(lmtest)
+library(stargazer)
 library("texreg")
 
 dfSIC4 <- read.csv('data/TFP_Compustat_keep.csv')
@@ -9,6 +10,9 @@ dfFF48 <- read.csv('data/TFP_Compustat_ff48_keep.csv')
 panelSIC4 <- pdata.frame(dfSIC4, index=c('gvkey','fyear'), drop.index = TRUE, row.names=TRUE)
 panelFF48 <- pdata.frame(dfFF48, index=c('gvkey','fyear'), drop.index = TRUE, row.names=TRUE)
 
+stargazer(panelSIC4[is.finite(panelSIC4$emp_size),],
+          omit=c('sic'),
+          digits=3)
 
 SIC1 <- plm('beme ~ gap + size', 
                  data=panelSIC4, index=c('gvkey','fyear'),
