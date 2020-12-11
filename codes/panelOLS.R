@@ -12,7 +12,11 @@ panelFF48 <- pdata.frame(dfFF48, index=c('gvkey','fyear'), drop.index = TRUE, ro
 
 stargazer(panelSIC4[is.finite(panelSIC4$emp_size),],
           omit=c('sic'),
-          digits=3)
+          digits=4)
+
+stargazer(panelFF48[is.finite(panelFF48$emp_size),],
+          omit=c('sic','ffi48'),
+          digits=4)
 
 SIC1 <- plm('beme ~ gap + size', 
                  data=panelSIC4, index=c('gvkey','fyear'),
